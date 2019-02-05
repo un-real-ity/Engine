@@ -1,11 +1,12 @@
 #pragma once
 #include <math.h>
 #include <iostream>
+#include "Utils.h"
+#include "Constants.h"
 
 struct Vector3
 {
 public:
-    static const float EQUAL_TOLERANCE;
     float x, y, z;
 
     ///
@@ -69,11 +70,12 @@ public:
         return v1*(1 - alpha) + v2*alpha;
     }
 
-    static bool equals(const Vector3& v1, const Vector3& v2)
+    static bool equals(const Vector3& v1, const Vector3& v2,
+        float tolerance = EQUAL_TOLERANCE)
     {
-        return std::abs(v1.x - v2.x) <= EQUAL_TOLERANCE &&
-            std::abs(v1.y - v2.y) <= EQUAL_TOLERANCE &&
-            std::abs(v1.z - v2.z) <= EQUAL_TOLERANCE;
+        return nearlyEquals(v1.x, v2.x, tolerance) &&
+            nearlyEquals(v1.y, v2.y, tolerance) &&
+            nearlyEquals(v1.z, v2.z, tolerance);
     }
 
     ///
@@ -159,8 +161,6 @@ public:
         return !(*this == v);
     }
 };
-
-const float Vector3::EQUAL_TOLERANCE = 1e-4f;
 
 Vector3 operator*(float k, Vector3 v)
 {
