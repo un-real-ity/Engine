@@ -64,6 +64,11 @@ public:
         return divide(v, v.length());
     }
 
+    static Vector3 lerp(const Vector3& v1, const Vector3& v2, float alpha)
+    {
+        return v1*(1 - alpha) + v2*alpha;
+    }
+
     static bool equals(const Vector3& v1, const Vector3& v2)
     {
         return std::abs(v1.x - v2.x) <= EQUAL_TOLERANCE &&
@@ -155,7 +160,7 @@ public:
     }
 };
 
-const float Vector3::EQUAL_TOLERANCE = 1e-4;
+const float Vector3::EQUAL_TOLERANCE = 1e-4f;
 
 Vector3 operator*(float k, Vector3 v)
 {

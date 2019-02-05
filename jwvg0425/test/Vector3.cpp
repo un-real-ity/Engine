@@ -88,6 +88,15 @@ TEST_CASE("vector3 operators", "[vector3]")
         REQUIRE((v1 ^ (v2 + v3)) == ((v1 ^ v2) + (v1 ^ v3)));
         REQUIRE((k * v1 ^ v2) == (v1 ^ k * v2));
         REQUIRE((k * v1 ^ v2) == k * (v1 ^ v2));
+    }
 
+    SECTION("lerp")
+    {
+        Vector3 v1(0.6f, 2.3f, 5.5f);
+        Vector3 v2(2.6f, 0.3f, 0.5f);
+
+        REQUIRE(Vector3::lerp(v1, v2, 0.5f) == Vector3(1.6f, 1.3f, 3.0f));
+        REQUIRE(Vector3::lerp(v1, v2, 0.0f) == v1);
+        REQUIRE(Vector3::lerp(v1, v2, 1.0f) == v2);
     }
 }
